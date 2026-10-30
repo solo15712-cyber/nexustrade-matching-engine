@@ -17,10 +17,10 @@ class OrderStatus(str, Enum):
     CANCELLED = "CANCELLED"
 
 class OrderCreate(BaseModel):
-    symbol: str = Field(..., example="BTCUSDT")
+    symbol: str = Field(..., json_schema_extra={"example": "BTCUSDT"})
     side: OrderSide
-    price: float = Field(..., gt=0, example=68500.0)
-    amount: float = Field(..., gt=0, example=0.25)
+    price: float = Field(..., gt=0, json_schema_extra={"example": 68500.0})
+    amount: float = Field(..., gt=0, json_schema_extra={"example": 0.25})
     order_type: OrderType = OrderType.LIMIT
 
 class OrderResponse(BaseModel):
