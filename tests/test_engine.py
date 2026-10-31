@@ -59,3 +59,9 @@ def test_api_order_validation():
     # Price <= 0 should fail validation
     res = client.post("/api/v1/orders", json={"symbol": "BTCUSDT", "side": "BUY", "price": -100.0, "amount": 1.0})
     assert res.status_code == 422
+
+def test_prometheus_metrics():
+    res = client.get("/metrics")
+    assert res.status_code == 200
+    assert "nexus_orders_total" in res.text
+    assert "nexus_engine_health 1" in res.text
